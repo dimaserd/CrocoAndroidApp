@@ -1,8 +1,8 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
+apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-kapt'
 
@@ -10,12 +10,13 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "com.example.crocoandroidapp"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -38,30 +39,16 @@ android {
 dependencies {
     implementation(
             fileTree(include: ['*.jar'], dir: 'libs'),
-            project(':data'),
             project(':domain'),
             deps.kotlin.stdlib,
             deps.androidx.appcompat,
-            deps.androidx.core_ktx,
-            deps.androidx.lifecycle_extensions,
-            deps.ui.constraintlayout,
-            deps.ui.material,
-            deps.gson.gson,
-            deps.retrofit.retrofit,
-            deps.retrofit.gson,
-            deps.retrofit.rxjava,
             deps.rx.rxjava,
             deps.rx.rxandroid,
-            deps.timber.timber,
+            deps.retrofit.retrofit,
+            deps.retrofit.gson,
             deps.stetho.stetho,
             deps.stetho.okhttp3,
-            deps.groupie.groupie,
-            deps.groupie.groupie_kotlin_android_extensions,
-            deps.state_delegator.state_delegator,
-            deps.rxbinding.rxbinding,
-            deps.rxbinding.core,
-            deps.rxbinding.appcompat,
-            deps.ktx.core_ktx,
+            deps.timber.timber,
             deps.koin.koin_core,
             deps.koin.koin_core_ext,
             deps.koin.koin_android,
@@ -73,4 +60,8 @@ dependencies {
             deps.tests.runner,
             deps.tests.espresso_core
     )
+}
+
+repositories {
+    mavenCentral()
 }

@@ -1,18 +1,14 @@
 package com.example.domain.utils
 
 import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class SchedulersProviderImpl : SchedulersProvider {
-    override fun io(): Scheduler {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    override fun computation(): Scheduler {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun io(): Scheduler = Schedulers.io()
 
-    override fun mainThread(): Scheduler {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun computation(): Scheduler = Schedulers.computation()
 
+    override fun mainThread(): Scheduler = AndroidSchedulers.mainThread()
 }

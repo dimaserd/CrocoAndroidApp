@@ -53,8 +53,6 @@ dependencies {
             deps.rx.rxjava,
             deps.rx.rxandroid,
             deps.timber.timber,
-            deps.stetho.stetho,
-            deps.stetho.okhttp3,
             deps.groupie.groupie,
             deps.groupie.groupie_kotlin_android_extensions,
             deps.state_delegator.state_delegator,
@@ -67,10 +65,7 @@ dependencies {
             deps.koin.koin_android,
             deps.koin.koin_android_scope,
             deps.koin.koin_android_viewmodel,
-    )
-    testImplementation(
-            deps.tests.junit,
-            deps.tests.runner,
-            deps.tests.espresso_core
+            deps.navigation.navigation,
+            deps.navigation.navigation_ui,
     )
 }

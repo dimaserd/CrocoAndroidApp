@@ -1,4 +1,4 @@
-package com.example.crocoandroidapp.di
+package com.example.crocoandroidapp.service_locator
 
 import com.example.data.network.client.OkHttpClientFactory
 import com.example.data.network.interceptor.AddCookiesInterceptor

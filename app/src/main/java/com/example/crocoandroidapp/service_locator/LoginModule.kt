@@ -1,4 +1,4 @@
-package com.example.crocoandroidapp.di
+package com.example.crocoandroidapp.service_locator
 
 import com.example.crocoandroidapp.presentation.login.viewmodel.LoginViewModel
 import com.example.crocoandroidapp.utils.NetworkConstants

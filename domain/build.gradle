@@ -46,13 +46,6 @@ dependencies {
             deps.koin.koin_android_scope,
             deps.koin.koin_android_viewmodel,
     )
-    testImplementation(
-            deps.tests.junit,
-            deps.tests.runner,
-            deps.tests.espresso_core
-    )
-    androidTestImplementation 'org.testng:testng:6.9.6'
-    androidTestImplementation 'org.testng:testng:6.9.6'
 }
 
 repositories {

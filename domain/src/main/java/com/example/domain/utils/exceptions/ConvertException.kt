@@ -1,3 +1,3 @@
-package com.example.domain.utils
+package com.example.domain.utils.exceptions
 
 class ConvertException(error: String) : Throwable(error)

@@ -46,19 +46,12 @@ dependencies {
             deps.rx.rxandroid,
             deps.retrofit.retrofit,
             deps.retrofit.gson,
-            deps.stetho.stetho,
-            deps.stetho.okhttp3,
             deps.timber.timber,
             deps.koin.koin_core,
             deps.koin.koin_core_ext,
             deps.koin.koin_android,
             deps.koin.koin_android_scope,
             deps.koin.koin_android_viewmodel,
-    )
-    testImplementation(
-            deps.tests.junit,
-            deps.tests.runner,
-            deps.tests.espresso_core
     )
 }
 

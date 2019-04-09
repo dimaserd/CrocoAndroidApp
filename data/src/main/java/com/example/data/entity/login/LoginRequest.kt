@@ -2,11 +2,14 @@ package com.example.data.entity.login
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginRequest(
+class LoginRequest(
+
+    @SerializedName("Email")
     val email: String,
 
+    @SerializedName("Password")
     val password: String,
 
-    @SerializedName("Remem")
+    @SerializedName("RememberMe")
     val rememberMe: Boolean
 )

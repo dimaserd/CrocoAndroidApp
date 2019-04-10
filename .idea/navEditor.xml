@@ -8,24 +8,7 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="croco_nav_graph_action_global_login">
-                    <value>
-                      <LayoutPositions />
-                    </value>
-                  </entry>
-                  <entry key="croco_nav_graph_fragment_croco">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="croco_nav_graph_fragment_login">
+                  <entry key="fragment_items">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -34,6 +17,44 @@
                             <option name="y" value="12" />
                           </Point>
                         </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragment_profile">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="168" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </LayoutPositions>
+          </value>
+        </entry>
+        <entry key="login_nav_graph.xml">
+          <value>
+            <LayoutPositions>
+              <option name="myPositions">
+                <map>
+                  <entry key="croco_nav_graph_action_global_login">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="fragment_croco">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="fragment_login">
+                    <value>
+                      <LayoutPositions>
                         <option name="myPositions">
                           <map>
                             <entry key="croco_nav_graph_action_login_to_croco">

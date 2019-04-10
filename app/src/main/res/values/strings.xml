@@ -9,4 +9,6 @@
     <string name="unknown_error">Неизвестная ошибка</string>
     <string name="failed_login">Неправильный логин или пароль</string>
     <string name="login_label">Авторизоваться в Приложение</string>
+    <string name="profile">Профиль</string>
+    <string name="items">Предметы</string>
 </resources>

@@ -26,6 +26,13 @@ class LoginViewModel(
 
     val stateCommand = CommandsLiveData<LoginViewState>()
 
+    init {
+
+        if (authUseCase.isLoggedIn()) {
+            navigateToMain()
+        }
+    }
+
     fun onEmailEntered(email: String) {
         this.email = email
 

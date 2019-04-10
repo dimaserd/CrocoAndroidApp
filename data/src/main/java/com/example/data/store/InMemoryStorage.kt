@@ -15,8 +15,8 @@ class InMemoryStorage {
         hashMap[AUTH_TOKEN_KEY] = authToken
     }
 
-    fun getAuthToken(): String {
-        return hashMap[AUTH_TOKEN_KEY] as String
+    fun getAuthToken(): String? {
+        return hashMap[AUTH_TOKEN_KEY] as? String
     }
 
     fun clearAllData() {

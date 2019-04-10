@@ -2,7 +2,7 @@ package com.example.crocoandroidapp.service_locator
 
 import com.example.crocoandroidapp.presentation.login.viewmodel.LoginViewModel
 import com.example.crocoandroidapp.utils.NetworkConstants
-import com.example.data.network.LoginApi
+import com.example.data.network.AuthApi
 import com.example.data.repository.LoginRepositoryImpl
 import com.example.domain.repository.LoginRepository
 import com.example.domain.usecase.AuthUseCase
@@ -19,9 +19,9 @@ val loginModule = module {
             addConverterFactory(GsonConverterFactory.create(get()))
             addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             build()
-        }.create(LoginApi::class.java)
+        }.create(AuthApi::class.java)
     }
-    factory<LoginRepository> { LoginRepositoryImpl(get()) }
+    factory<LoginRepository> { LoginRepositoryImpl(get(), get()) }
     factory { AuthUseCase(get()) }
     viewModel { LoginViewModel(get(), get()) }
 }

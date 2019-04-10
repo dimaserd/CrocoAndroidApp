@@ -8,4 +8,12 @@ class AuthUseCase(private val loginRepository: LoginRepository) {
     fun login(email: String, password: String): Single<Boolean> {
         return loginRepository.login(email, password)
     }
+
+    fun logout() {
+        loginRepository.logout()
+    }
+
+    fun isLoggedIn(): Boolean {
+        return loginRepository.isLoggedIn()
+    }
 }

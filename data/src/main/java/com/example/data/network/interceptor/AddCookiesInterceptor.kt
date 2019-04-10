@@ -11,7 +11,7 @@ class AddCookiesInterceptor(private val inMemoryStorage: InMemoryStorage) : Inte
         val builder = chain.request().newBuilder()
 
         val authToken = inMemoryStorage.getAuthToken()
-        authToken.let { builder.addHeader(COOKIE, it) }
+        authToken?.let { builder.addHeader(COOKIE, it) }
 
         return chain.proceed(builder.build())
     }

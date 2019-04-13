@@ -13,7 +13,13 @@ class LoginRepositoryImpl(
 ) : LoginRepository {
 
     override fun login(email: String, password: String): Single<Boolean> {
-        return authApi.login(LoginConverter.toNetwork(email, password)).map { it.isSucceeded }
+        return authApi.login(LoginConverter.toNetwork(email, password)).map {
+            if (!it.isSucceeded) {
+                it.message == "Вы уже авторизованы в системе"
+            } else {
+                it.isSucceeded
+            }
+        }
     }
 
     override fun logout(): Completable {
@@ -21,6 +27,7 @@ class LoginRepositoryImpl(
     }
 
     override fun isLoggedIn(): Boolean {
-        return inMemoryStorage.getAuthToken() != null
+        // TODO
+        return false
     }
 }

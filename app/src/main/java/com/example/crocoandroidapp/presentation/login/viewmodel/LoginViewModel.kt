@@ -4,6 +4,7 @@ import android.util.Patterns
 import com.example.crocoandroidapp.R
 import com.example.crocoandroidapp.presentation.base.BaseViewModel
 import com.example.crocoandroidapp.presentation.login.state.LoginViewState
+import com.example.crocoandroidapp.presentation.login.state.LoginViewState.*
 import com.example.crocoandroidapp.utils.CommandsLiveData
 import com.example.crocoandroidapp.utils.smartSubscribe
 import com.example.domain.usecase.AuthUseCase
@@ -17,7 +18,6 @@ class LoginViewModel(
 
     companion object {
 
-        private const val TAG = "LoginViewModel"
         private val emailPattern = Patterns.EMAIL_ADDRESS
     }
 
@@ -37,9 +37,9 @@ class LoginViewModel(
         this.email = email
 
         if (checkEmailFormat(email)) {
-            stateCommand.onNext(LoginViewState.RightEmail)
+            stateCommand.onNext(RightEmail)
         } else {
-            stateCommand.onNext(LoginViewState.WrongEmail)
+            stateCommand.onNext(WrongEmail)
         }
     }
 
@@ -49,17 +49,17 @@ class LoginViewModel(
 
     fun onLoginButtonClicked() {
         if (isCredentialsOk()) {
-            stateCommand.onNext(LoginViewState.Loading)
+            stateCommand.onNext(Loading)
 
             authUseCase.login(email, password)
                 .schedulersIoToMain(schedulersProvider)
                 .smartSubscribe(
                     onSuccess = { handleSuccess(it) },
-                    onError = { stateCommand.onNext(LoginViewState.SnackBarErrorCommand(it)) }
+                    onError = { stateCommand.onNext(SnackBarErrorCommand(it)) }
                 )
                 .disposeOnViewModelDestroy()
         } else {
-            stateCommand.onNext(LoginViewState.SnackBarErrorCommand(R.string.wrong_credentials_format))
+            stateCommand.onNext(SnackBarErrorCommand(R.string.wrong_credentials_format))
         }
     }
 
@@ -67,15 +67,15 @@ class LoginViewModel(
         if (isSucceeded) {
             navigateToMain()
         } else {
-            stateCommand.onNext(LoginViewState.SnackBarErrorCommand(R.string.failed_login))
+            stateCommand.onNext(SnackBarErrorCommand(R.string.failed_login))
         }
     }
 
     private fun navigateToMain() {
-        stateCommand.onNext(LoginViewState.Success)
+        stateCommand.onNext(Success)
     }
 
-    private fun isCredentialsOk() = checkEmailFormat(email) and checkPasswordLength(password)
+    private fun isCredentialsOk() = checkEmailFormat(email) && checkPasswordLength(password)
 
     private fun checkEmailFormat(email: String): Boolean = emailPattern.matcher(email).matches()
 

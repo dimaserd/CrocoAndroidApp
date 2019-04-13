@@ -18,6 +18,7 @@ val loginModule = module {
             baseUrl(NetworkConstants.URL)
             addConverterFactory(GsonConverterFactory.create(get()))
             addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            client(get())
             build()
         }.create(AuthApi::class.java)
     }

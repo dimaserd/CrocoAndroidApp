@@ -18,6 +18,9 @@ versions.rxbinding = '3.0.0-alpha2'
 versions.core_ktx = '1.0.0'
 versions.koin = '2.0.0-rc-2'
 versions.navigation = '2.0.0'
+versions.stetho = '1.5.1'
+versions.okhttp = '3.14.1'
+versions.persistentCookieJar = '1.0.1'
 
 def deps = [:]
 
@@ -87,5 +90,18 @@ def navigation = [:]
 navigation.navigation = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
 navigation.navigation_ui = "androidx.navigation:navigation-ui:$versions.navigation"
 deps.navigation = navigation
+
+def stetho = [:]
+stetho.okhttp3 = "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
+stetho.stetho = "com.facebook.stetho:stetho:$versions.stetho"
+deps.stetho = stetho
+
+def okhttp = [:]
+okhttp.urlconnection = "com.squareup.okhttp3:okhttp-urlconnection:$versions.okhttp"
+deps.okhttp = okhttp
+
+def franmontiel = [:]
+franmontiel.persistentCookieJar = "com.github.franmontiel:PersistentCookieJar:v$versions.persistentCookieJar"
+deps.franmontiel = franmontiel
 
 ext.deps = deps

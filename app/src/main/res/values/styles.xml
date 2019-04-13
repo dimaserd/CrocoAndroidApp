@@ -26,4 +26,17 @@
         <item name="android:minHeight">64dp</item>
     </style>
 
+    <style name="ContentText" parent="Theme.MaterialComponents.Light">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="HeaderText" parent="ContentText">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="DescriptionText" parent="ContentText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorDescriptionText</item>
+    </style>
+
 </resources>

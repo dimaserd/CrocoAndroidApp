@@ -23,6 +23,7 @@ class CrocoAndroidApp : Application() {
                 editProfileModule,
                 taskModule,
                 networkModule,
+                choosingUsersModule,
                 persistentModule,
                 utilsModule
             )

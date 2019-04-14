@@ -19,6 +19,11 @@ import kotlinx.android.synthetic.main.fragment_tasks.fragment_tasks_text_view_ze
 
 class TasksFragment : BaseFragment() {
 
+    companion object {
+
+        const val USERS_EXTRA = "USERS_EXTRA"
+    }
+
     private val viewModel by inject<TasksViewModel>()
 
     override fun getLayout() = R.layout.fragment_tasks
@@ -31,11 +36,7 @@ class TasksFragment : BaseFragment() {
 
         arguments?.let {
             // TODO
-//            viewModel.loadTasks(it.getStringArrayList(""), it.getString(""))
         }
-
-        // TODO remove
-        viewModel.loadTasks(listOf("1", "2"), "3")
 
         showLoading()
     }

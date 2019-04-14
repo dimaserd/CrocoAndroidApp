@@ -1,5 +1,6 @@
 package com.example.data.repository
 
+import com.example.data.converter.AllUsersConverter
 import com.example.data.converter.EditProfileConverter
 import com.example.data.converter.UserConverter
 import com.example.data.network.UserApi
@@ -12,6 +13,10 @@ class UserRepositoryImpl(private val userApi: UserApi) : UserRepository {
 
     override fun loadUser(): Single<User> {
         return userApi.loadUser().map { UserConverter.fromNetwork(it) }
+    }
+
+    override fun loadAllUsers(): Single<List<User>> {
+        return userApi.loadAllUsers(AllUsersConverter.toNetwork()).map { AllUsersConverter.fromNetwork(it) }
     }
 
     override fun updateProfile(user: User): Completable {

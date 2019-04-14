@@ -10,13 +10,6 @@ fun <T> MutableLiveData<T>.onNext(next: T) {
     this.value = next
 }
 
-inline fun <reified T : Any, reified L : LiveData<T?>> FragmentActivity.observe(
-    liveData: L,
-    noinline block: (T) -> Unit
-) {
-    liveData.observe(this, Observer { it?.let { block.invoke(it) } })
-}
-
 inline fun <reified T : Any, reified L : LiveData<T?>> Fragment.observe(
     liveData: L,
     noinline block: (T) -> Unit

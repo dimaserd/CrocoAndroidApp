@@ -11,6 +11,10 @@ class UserUseCase(private val userRepository: UserRepository) {
         return userRepository.loadUser()
     }
 
+    fun loadAllUsers(): Single<List<User>> {
+        return userRepository.loadAllUsers()
+    }
+
     fun updateUser(user: User): Completable {
         return userRepository.updateProfile(user)
     }

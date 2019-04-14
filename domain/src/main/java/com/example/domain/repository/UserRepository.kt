@@ -8,5 +8,7 @@ interface UserRepository {
 
     fun loadUser(): Single<User>
 
+    fun loadAllUsers(): Single<List<User>>
+
     fun updateProfile(user: User): Completable
 }

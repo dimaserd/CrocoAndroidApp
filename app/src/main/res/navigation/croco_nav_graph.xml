@@ -39,7 +39,7 @@
         android:id="@+id/fragment_choose_users"
         android:name="com.example.crocoandroidapp.presentation.choose_users.fragment.ChooseUsersFragment"
         android:label="ChooseUsersFragment"
-        tools:layout="@layout/fragment_choose_user">
+        tools:layout="@layout/fragment_choose_users">
         <action
             android:id="@+id/action_choose_users_to_choosing_users"
             app:destination="@id/fragment_choosing_users"

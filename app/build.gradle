@@ -79,5 +79,6 @@ dependencies {
             deps.stetho.stetho,
             deps.stetho.okhttp3,
             deps.franmontiel.persistentCookieJar,
+            deps.recyclerview.recyclerview,
     )
 }

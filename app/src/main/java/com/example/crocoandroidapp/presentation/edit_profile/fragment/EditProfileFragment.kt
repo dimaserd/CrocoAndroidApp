@@ -42,17 +42,39 @@ class EditProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.apply {
-            getParcelable<User>(USER_EXTRA)?.let { viewModel.setUser(it) }
+            getParcelable<User>(USER_EXTRA)?.let { viewModel.copyUser(it) }
         }
 
         observe(viewModel.stateCommand, ::onStateChanged)
-        observe(viewModel.userLiveData, ::onUserChanged)
 
         initViews()
     }
 
     private fun initViews() {
         buttonSafe.setOnClickListener {
+            val firstName = editTextName.text.toString()
+            val secondName = editTextSecondName.text.toString()
+            val thirdName = editTextThirdName.text.toString()
+            val phoneNumber = editTextPhoneNumber.text.toString()
+            val birthDateYear = datePickerBirthDate.year
+            val birthDateMonth = datePickerBirthDate.month
+            val birthDateDay = datePickerBirthDate.dayOfMonth
+            val birthDay = Calendar.getInstance().apply {
+                set(Calendar.YEAR, birthDateYear)
+                set(Calendar.MONTH, birthDateMonth)
+                set(Calendar.DAY_OF_MONTH, birthDateDay)
+            }.time
+            val sex = convertIdToSex(radioGroupSex.checkedRadioButtonId)
+            val newUser = User(
+                firstName = firstName,
+                secondName = secondName,
+                thirdName = thirdName,
+                phoneNumber = phoneNumber,
+                birthDate = birthDay,
+                sex = sex,
+                email = viewModel.user.email
+            )
+            viewModel.copyUser(newUser)
             viewModel.updateProfile()
         }
 
@@ -62,9 +84,6 @@ class EditProfileFragment : BaseFragment() {
             } else {
                 editTextLayoutName.error = null
             }
-
-            val newUser = viewModel.userLiveData.value!!.copy(firstName = it)
-            viewModel.setUser(newUser)
         }
 
         editTextPhoneNumber.setOnTextChangedListener {
@@ -73,24 +92,24 @@ class EditProfileFragment : BaseFragment() {
             } else {
                 editTextLayoutPhoneNumber.error = null
             }
-
-            val newUser = viewModel.userLiveData.value!!.copy(phoneNumber = it)
-            viewModel.setUser(newUser)
         }
 
-        editTextSecondName.setOnTextChangedListener {
-            val newUser = viewModel.userLiveData.value!!.copy(secondName = it)
-            viewModel.setUser(newUser)
-        }
+        with(viewModel.user) {
+            editTextName.setText(firstName)
+            editTextPhoneNumber.setText(phoneNumber)
+            editTextSecondName.setText(secondName)
+            editTextThirdName.setText(thirdName)
 
-        editTextThirdName.setOnTextChangedListener {
-            val newUser = viewModel.userLiveData.value!!.copy(thirdName = it)
-            viewModel.setUser(newUser)
-        }
+            birthDate?.let {
+                val calendar = Calendar.getInstance().apply { time = it }
+                val year = calendar.get(Calendar.YEAR)
+                val month = calendar.get(Calendar.MONTH)
+                val day = calendar.get(Calendar.DAY_OF_MONTH)
+                datePickerBirthDate.updateDate(year, month, day)
+            }
 
-        radioGroupSex.setOnCheckedChangeListener { group, checkedId ->
-            val newUser = viewModel.userLiveData.value!!.copy(sex = convertIdToSex(checkedId))
-            viewModel.setUser(newUser)
+            val sexId = convertSexToId(sex)
+            radioGroupSex.check(sexId)
         }
 
         showContent()
@@ -104,33 +123,6 @@ class EditProfileFragment : BaseFragment() {
                 showContent()
                 showSnackbar(state.messageResource)
             }
-        }
-    }
-
-    private fun onUserChanged(user: User) {
-        with(user) {
-            editTextName.setText(firstName)
-            editTextPhoneNumber.setText(phoneNumber)
-            editTextSecondName.setText(secondName)
-            editTextThirdName.setText(thirdName)
-
-            birthDate?.let {
-                val calendar = Calendar.getInstance().apply { time = it }
-                val year = calendar.get(Calendar.YEAR)
-                val month = calendar.get(Calendar.MONTH)
-                val day = calendar.get(Calendar.DAY_OF_MONTH)
-                datePickerBirthDate.init(year, month, day) { _, initYear, initMonth, initDay ->
-                    val newUser = viewModel.userLiveData.value!!.copy(birthDate = Calendar.getInstance().apply {
-                        set(Calendar.YEAR, initYear)
-                        set(Calendar.MONTH, initMonth)
-                        set(Calendar.DAY_OF_MONTH, initDay)
-                    }.time)
-                    viewModel.setUser(newUser)
-                }
-            }
-
-            val sexId = convertSexToId(sex)
-            radioGroupSex.check(sexId)
         }
     }
 

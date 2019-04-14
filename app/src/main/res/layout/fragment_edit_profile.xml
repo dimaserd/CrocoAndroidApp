@@ -45,6 +45,8 @@
                     android:id="@+id/fragment_edit_profile_text_input_edit_text_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:maxLength="64"
+                    android:maxLines="1"
                     tools:text="@tools:sample/first_names" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -70,6 +72,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="number"
+                    android:maxLength="64"
+                    android:maxLines="1"
                     tools:text="@tools:sample/us_phones" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -105,6 +109,8 @@
                     android:id="@+id/fragment_edit_profile_text_input_edit_text_second_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:maxLength="64"
+                    android:maxLines="1"
                     tools:text="@tools:sample/last_names" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -129,6 +135,8 @@
                     android:id="@+id/fragment_edit_profile_text_input_edit_text_third_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:maxLength="64"
+                    android:maxLines="1"
                     tools:text="@tools:sample/last_names" />
 
             </com.google.android.material.textfield.TextInputLayout>

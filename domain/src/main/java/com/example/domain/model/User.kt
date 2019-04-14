@@ -6,6 +6,7 @@ import java.util.*
 
 @Parcelize
 data class User(
+    val id: String = "",
     val firstName: String,
     val secondName: String?,
     val thirdName: String?,

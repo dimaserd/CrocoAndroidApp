@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface TaskRepository {
 
-    fun loadTasks(userIds: List<String>, taskId: String): Single<List<Task>>
+    fun loadTasks(userIds: List<String>): Single<List<Task>>
 }

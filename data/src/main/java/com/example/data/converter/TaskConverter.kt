@@ -12,11 +12,10 @@ import com.example.domain.utils.exceptions.ConvertException
 
 object TaskConverter {
 
-    fun toNetwork(monthShift: Int, userIds: List<String>, taskId: String): TaskRequest {
+    fun toNetwork(monthShift: Int, userIds: List<String>): TaskRequest {
         return TaskRequest(
             monthShift = monthShift,
-            userIds = userIds,
-            taskId = taskId
+            userIds = userIds
         )
     }
 

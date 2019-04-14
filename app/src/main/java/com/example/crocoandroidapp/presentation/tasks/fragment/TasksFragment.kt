@@ -11,10 +11,16 @@ import com.example.crocoandroidapp.utils.makeGone
 import com.example.crocoandroidapp.utils.makeVisible
 import com.example.crocoandroidapp.utils.observe
 import com.example.domain.model.Task
+import com.example.domain.model.UserList
 import org.koin.android.ext.android.inject
 import kotlinx.android.synthetic.main.fragment_tasks.fragment_tasks_constraint_layout_content as content
+import kotlinx.android.synthetic.main.fragment_tasks.fragment_tasks_floating_action_bar_edit as buttonAdd
+import kotlinx.android.synthetic.main.fragment_tasks.fragment_tasks_image_button_back as buttonBack
+import kotlinx.android.synthetic.main.fragment_tasks.fragment_tasks_image_button_forward as buttonForward
 import kotlinx.android.synthetic.main.fragment_tasks.fragment_tasks_progress_bar_loading as progressBar
 import kotlinx.android.synthetic.main.fragment_tasks.fragment_tasks_recycler_view_tasks as tasks
+import kotlinx.android.synthetic.main.fragment_tasks.fragment_tasks_spinner_users as spinnerUsers
+import kotlinx.android.synthetic.main.fragment_tasks.fragment_tasks_text_view_current_month as textViewCurrentMonth
 import kotlinx.android.synthetic.main.fragment_tasks.fragment_tasks_text_view_zero_screen as zeroScreen
 
 class TasksFragment : BaseFragment() {
@@ -35,7 +41,10 @@ class TasksFragment : BaseFragment() {
         observe(viewModel.tasksLiveData, ::onTasksChanged)
 
         arguments?.let {
-            // TODO
+            it.getParcelable<UserList>(USERS_EXTRA)?.let { userList ->
+                viewModel.addUsers(userList.users)
+                viewModel.loadTasks(userList.users)
+            }
         }
 
         showLoading()

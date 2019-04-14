@@ -6,7 +6,7 @@ import io.reactivex.Single
 
 class TaskUseCase(private val taskRepository: TaskRepository) {
 
-    fun loadTasks(userIds: List<String>, taskId: String): Single<List<Task>> {
-        return taskRepository.loadTasks(userIds, taskId)
+    fun loadTasks(userIds: List<String>): Single<List<Task>> {
+        return taskRepository.loadTasks(userIds)
     }
 }

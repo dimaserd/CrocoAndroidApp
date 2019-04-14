@@ -8,7 +8,7 @@ import io.reactivex.Single
 
 class TaskRepositoryImpl(private val taskApi: TaskApi) : TaskRepository {
 
-    override fun loadTasks(userIds: List<String>, taskId: String): Single<List<Task>> {
-        return taskApi.getTasks(TaskConverter.toNetwork(12, userIds, taskId)).map { TaskConverter.fromNetwork(it) }
+    override fun loadTasks(userIds: List<String>): Single<List<Task>> {
+        return taskApi.getTasks(TaskConverter.toNetwork(12, userIds)).map { TaskConverter.fromNetwork(it) }
     }
 }

@@ -45,9 +45,7 @@ class ProfileFragment : BaseFragment() {
 
     private fun initViews() {
         editFab.setOnClickListener {
-            val bundle = bundleOf(
-                USER_EXTRA to viewModel.userLiveData.value
-            )
+            val bundle = bundleOf(USER_EXTRA to viewModel.userLiveData.value)
             findNavController().navigate(R.id.action_profile_to_edit_profile, bundle)
         }
     }
@@ -78,18 +76,21 @@ class ProfileFragment : BaseFragment() {
 
     private fun showContent() {
         content.makeVisible()
+        editFab.show()
         progressBar.makeGone()
         zeroScreen.makeGone()
     }
 
     private fun showLoading() {
         content.makeGone()
+        editFab.hide()
         progressBar.makeVisible()
         zeroScreen.makeGone()
     }
 
     private fun showZeroScreen() {
         content.makeGone()
+        editFab.hide()
         progressBar.makeGone()
         zeroScreen.makeVisible()
     }

@@ -9,7 +9,11 @@
         android:id="@+id/fragment_tasks"
         android:name="com.example.crocoandroidapp.presentation.tasks.fragment.TasksFragment"
         android:label="ItemsFragment"
-        tools:layout="@layout/fragment_tasks" />
+        tools:layout="@layout/fragment_tasks">
+        <action
+            android:id="@+id/action_fragment_tasks_to_add_task"
+            app:destination="@id/fragment_add_task" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_profile"
@@ -61,6 +65,16 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_add_task"
+        android:name="com.example.crocoandroidapp.presentation.add_task.fragment.AddTaskFragment"
+        android:label="AddTaskFragment"
+        tools:layout="@layout/fragment_add_task">
+        <action
+            android:id="@+id/action_add_task_to_tasks"
+            app:destination="@id/fragment_tasks" />
     </fragment>
 
 </navigation>

@@ -58,7 +58,7 @@
             app:layout_constraintTop_toTopOf="@+id/fragment_tasks_text_view_current_month" />
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/fragment_tasks_view_pager_tasks"
+            android:id="@+id/fragment_tasks_view_pager_months"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
@@ -71,6 +71,14 @@
                 android:id="@+id/fragment_tasks_recycler_view_tasks"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fragment_tasks_floating_action_bar_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_add_white_24dp" />
 
         </androidx.viewpager.widget.ViewPager>
 
@@ -89,14 +97,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fragment_tasks_floating_action_bar_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_add_white_24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

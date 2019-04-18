@@ -16,7 +16,7 @@ class EditProfileViewModel(
     private val schedulersProvider: SchedulersProvider
 ) : BaseViewModel() {
 
-    var user = User("", "", null, null, null, null, null, null)
+    var user = User("", "", null, null, null, null, null, null, 0)
     val stateCommand = CommandsLiveData<EditProfileViewState>()
 
     fun copyUser(newUser: User) {

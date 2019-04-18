@@ -13,5 +13,6 @@ data class User(
     val birthDate: Date?,
     val sex: Sex?,
     val email: String?,
-    val phoneNumber: String?
+    val phoneNumber: String?,
+    val avatarFieldId: Int
 ) : Parcelable

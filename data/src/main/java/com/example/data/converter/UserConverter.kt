@@ -21,7 +21,8 @@ object UserConverter {
                 ).parse(it.birthDate) else null,
                 sex = if (it.sex) Sex.MALE else Sex.FEMALE,
                 email = it.email,
-                phoneNumber = it.phoneNumber
+                phoneNumber = it.phoneNumber,
+                avatarFieldId = it.avatarFileId ?: 0
             )
         } ?: throw ConvertException("user is null")
     }

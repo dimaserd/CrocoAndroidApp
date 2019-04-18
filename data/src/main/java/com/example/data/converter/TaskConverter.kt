@@ -62,6 +62,7 @@ object TaskConverter {
             secondName = author.surname,
             thirdName = author.patronymic,
             email = author.email,
+            avatarFieldId = author.avatarFileId,
             birthDate = null,
             phoneNumber = null,
             sex = null

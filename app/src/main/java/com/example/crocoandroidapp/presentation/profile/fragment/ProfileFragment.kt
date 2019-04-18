@@ -1,9 +1,17 @@
 package com.example.crocoandroidapp.presentation.profile.fragment
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore.ACTION_IMAGE_CAPTURE
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.crocoandroidapp.R
 import com.example.crocoandroidapp.presentation.base.BaseFragment
 import com.example.crocoandroidapp.presentation.base.LoadingViewState
@@ -18,6 +26,7 @@ import com.example.domain.utils.SexConverter
 import org.koin.android.ext.android.inject
 import kotlinx.android.synthetic.main.fragment_profile.fragment_profile_constraint_layout_content as content
 import kotlinx.android.synthetic.main.fragment_profile.fragment_profile_floating_action_bar_edit as editFab
+import kotlinx.android.synthetic.main.fragment_profile.fragment_profile_image_view_avatar as imageViewAvatar
 import kotlinx.android.synthetic.main.fragment_profile.fragment_profile_progress_bar_loading as progressBar
 import kotlinx.android.synthetic.main.fragment_profile.fragment_profile_text_view_email as textViewEmail
 import kotlinx.android.synthetic.main.fragment_profile.fragment_profile_text_view_name as textViewName
@@ -28,6 +37,12 @@ import kotlinx.android.synthetic.main.fragment_profile.fragment_profile_text_vie
 import kotlinx.android.synthetic.main.fragment_profile.fragment_profile_text_view_zero_screen as zeroScreen
 
 class ProfileFragment : BaseFragment() {
+
+    companion object {
+
+        private const val CAMERA_PERMISSION_CODE = 1
+        private const val CAMERA_REQUEST = 2
+    }
 
     private val viewModel by inject<ProfileViewModel>()
 
@@ -43,10 +58,40 @@ class ProfileFragment : BaseFragment() {
         showLoading()
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                takePhoto()
+            } else {
+                showSnackbar(R.string.no_camera)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            val photo = data?.extras?.get("data") as Bitmap
+            imageViewAvatar.setImageBitmap(photo)
+        }
+    }
+
     private fun initViews() {
         editFab.setOnClickListener {
             val bundle = bundleOf(USER_EXTRA to viewModel.userLiveData.value)
             findNavController().navigate(R.id.action_profile_to_edit_profile, bundle)
+        }
+
+        imageViewAvatar.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(
+                    activity!!,
+                    Manifest.permission.CAMERA
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissions(arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST)
+            } else {
+                takePhoto()
+            }
         }
     }
 
@@ -62,6 +107,11 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
+    private fun takePhoto() {
+        val cameraIntent = Intent(ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent, CAMERA_REQUEST)
+    }
+
     private fun onUserChanged(user: User) {
         showContent()
         with(user) {
@@ -71,6 +121,12 @@ class ProfileFragment : BaseFragment() {
             textViewSex.text = getString(SexConverter.convertToResId(sex))
             textViewEmail.text = email
             textViewPhoneNumber.text = phoneNumber
+            Glide
+                .with(requireContext())
+                .load("")
+                .centerCrop()
+                .placeholder(R.drawable.logo)
+                .into(imageViewAvatar)
         }
     }
 

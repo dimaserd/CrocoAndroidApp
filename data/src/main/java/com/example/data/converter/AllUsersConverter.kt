@@ -40,7 +40,8 @@ object AllUsersConverter {
                             "yyyy-MM-dd'T'HH:mm:ss",
                             Locale.ENGLISH
                         ).parse(birthDate) else null,
-                        phoneNumber = phoneNumber
+                        phoneNumber = phoneNumber,
+                        avatarFieldId = avatarFileId
                     )
                 }
             }

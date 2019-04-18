@@ -80,5 +80,9 @@ dependencies {
             deps.stetho.okhttp3,
             deps.franmontiel.persistentCookieJar,
             deps.recyclerview.recyclerview,
+            deps.glide.glide,
+    )
+    annotationProcessor(
+            deps.glide.compiler,
     )
 }

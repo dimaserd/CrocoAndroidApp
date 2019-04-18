@@ -72,7 +72,8 @@ class EditProfileFragment : BaseFragment() {
                 phoneNumber = phoneNumber,
                 birthDate = birthDay,
                 sex = sex,
-                email = viewModel.user.email
+                email = viewModel.user.email,
+                avatarFieldId = 0
             )
             viewModel.copyUser(newUser)
             viewModel.updateProfile()

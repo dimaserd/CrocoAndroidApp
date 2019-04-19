@@ -1,6 +1,8 @@
 package com.example.domain.usecase
 
+import com.example.domain.model.Avatar
 import com.example.domain.model.User
+import com.example.domain.model.UserWithAvatar
 import com.example.domain.repository.UserRepository
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -9,6 +11,18 @@ class UserUseCase(private val userRepository: UserRepository) {
 
     fun loadUser(): Single<User> {
         return userRepository.loadUser()
+    }
+
+    fun loadAvatar(avatarFieldId: Int): Single<Avatar> {
+        return userRepository.loadAvatar(avatarFieldId)
+    }
+
+    fun loadUserWithAvatar(): Single<UserWithAvatar> {
+        return loadUser().flatMap { user ->
+            loadAvatar(user.avatarFieldId).map { avatar ->
+                UserWithAvatar(user, avatar)
+            }
+        }
     }
 
     fun loadAllUsers(): Single<List<User>> {

@@ -7,7 +7,7 @@ import com.example.crocoandroidapp.presentation.base.LoadingViewState.SnackBarEr
 import com.example.crocoandroidapp.utils.CommandsLiveData
 import com.example.crocoandroidapp.utils.onNext
 import com.example.crocoandroidapp.utils.smartSubscribe
-import com.example.domain.model.User
+import com.example.domain.model.UserWithAvatar
 import com.example.domain.usecase.UserUseCase
 import com.example.domain.utils.SchedulersProvider
 import com.example.domain.utils.schedulersIoToMain
@@ -22,14 +22,14 @@ class ProfileViewModel(
         loadUser()
     }
 
-    val userLiveData = MutableLiveData<User>()
+    val profileLiveData = MutableLiveData<UserWithAvatar>()
     val stateCommand = CommandsLiveData<LoadingViewState>()
 
     private fun loadUser() {
-        userUseCase.loadUser()
+        userUseCase.loadUserWithAvatar()
             .schedulersIoToMain(schedulersProvider)
             .smartSubscribe(
-                onSuccess = { userLiveData.onNext(it) },
+                onSuccess = { profileLiveData.onNext(it) },
                 onError = { stateCommand.onNext(SnackBarErrorCommand(it)) }
             )
             .disposeOnViewModelDestroy()

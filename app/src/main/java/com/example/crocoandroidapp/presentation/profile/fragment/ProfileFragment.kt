@@ -21,7 +21,7 @@ import com.example.crocoandroidapp.presentation.profile.viewmodel.ProfileViewMod
 import com.example.crocoandroidapp.utils.makeGone
 import com.example.crocoandroidapp.utils.makeVisible
 import com.example.crocoandroidapp.utils.observe
-import com.example.domain.model.User
+import com.example.domain.model.UserWithAvatar
 import com.example.domain.utils.SexConverter
 import org.koin.android.ext.android.inject
 import kotlinx.android.synthetic.main.fragment_profile.fragment_profile_constraint_layout_content as content
@@ -52,7 +52,7 @@ class ProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observe(viewModel.stateCommand, ::onStateChanged)
-        observe(viewModel.userLiveData, ::onUserChanged)
+        observe(viewModel.profileLiveData, ::onProfileChanged)
 
         initViews()
         showLoading()
@@ -78,7 +78,7 @@ class ProfileFragment : BaseFragment() {
 
     private fun initViews() {
         editFab.setOnClickListener {
-            val bundle = bundleOf(USER_EXTRA to viewModel.userLiveData.value)
+            val bundle = bundleOf(USER_EXTRA to viewModel.profileLiveData.value)
             findNavController().navigate(R.id.action_profile_to_edit_profile, bundle)
         }
 
@@ -112,22 +112,24 @@ class ProfileFragment : BaseFragment() {
         startActivityForResult(cameraIntent, CAMERA_REQUEST)
     }
 
-    private fun onUserChanged(user: User) {
+    private fun onProfileChanged(userWithAvatar: UserWithAvatar) {
         showContent()
-        with(user) {
+
+        with(userWithAvatar.user) {
             textViewName.text = firstName
             textViewSecondName.text = secondName ?: getString(R.string.not_mentioned)
             textViewThirdName.text = thirdName ?: getString(R.string.not_mentioned)
             textViewSex.text = getString(SexConverter.convertToResId(sex))
             textViewEmail.text = email
             textViewPhoneNumber.text = phoneNumber
-            Glide
-                .with(requireContext())
-                .load("")
-                .centerCrop()
-                .placeholder(R.drawable.logo)
-                .into(imageViewAvatar)
         }
+
+        Glide
+            .with(requireContext())
+            .load(userWithAvatar.avatar.bitmap)
+            .centerCrop()
+            .placeholder(R.drawable.logo)
+            .into(imageViewAvatar)
     }
 
     private fun showContent() {

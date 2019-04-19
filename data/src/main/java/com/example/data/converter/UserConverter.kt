@@ -22,7 +22,7 @@ object UserConverter {
                 sex = if (it.sex) Sex.MALE else Sex.FEMALE,
                 email = it.email,
                 phoneNumber = it.phoneNumber,
-                avatarFieldId = it.avatarFileId ?: 0
+                avatarFieldId = it.avatarFileId ?: 1
             )
         } ?: throw ConvertException("user is null")
     }

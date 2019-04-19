@@ -2,6 +2,7 @@ package com.example.crocoandroidapp.service_locator
 
 import com.example.data.network.client.OkHttpClientFactory
 import com.example.data.network.interceptor.ErrorHandlerInterceptor
+import com.example.data.network.interceptor.SaveCookiesInterceptor
 import com.franmontiel.persistentcookiejar.ClearableCookieJar
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
@@ -14,5 +15,6 @@ val networkModule = module {
     factory { GsonBuilder().setLenient().create() }
     factory<ClearableCookieJar> { PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(androidContext())) }
     factory { ErrorHandlerInterceptor() }
-    factory { OkHttpClientFactory(get(), get()).createClient() }
+    factory { SaveCookiesInterceptor(get()) }
+    factory { OkHttpClientFactory(get(), get(), get()).createClient() }
 }

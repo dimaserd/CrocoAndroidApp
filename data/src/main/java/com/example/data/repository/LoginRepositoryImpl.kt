@@ -2,14 +2,14 @@ package com.example.data.repository
 
 import com.example.data.converter.LoginConverter
 import com.example.data.network.AuthApi
-import com.example.data.store.InMemoryStorage
+import com.example.data.store.PersistentStorage
 import com.example.domain.repository.LoginRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 
 class LoginRepositoryImpl(
     private val authApi: AuthApi,
-    private val inMemoryStorage: InMemoryStorage
+    private val persistentStorage: PersistentStorage
 ) : LoginRepository {
 
     override fun login(email: String, password: String): Single<Boolean> {
@@ -27,7 +27,7 @@ class LoginRepositoryImpl(
     }
 
     override fun isLoggedIn(): Boolean {
-        // TODO
-        return false
+        // TODO add check on expired
+        return persistentStorage.getCookies() != null
     }
 }

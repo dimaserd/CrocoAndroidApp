@@ -15,7 +15,7 @@ class OkHttpClientFactory(
 
     companion object {
 
-        private const val CONNECT_TIMEOUT = 10L
+        private const val CONNECT_TIMEOUT = 30L
     }
 
     fun createClient(): OkHttpClient {

@@ -8,5 +8,8 @@ class TaskRequest(
     val monthShift: Int,
 
     @SerializedName("UserIds")
-    val userIds: List<String>
+    val userIds: List<String>,
+
+    @SerializedName("ShowTasksWithNoAssignee")
+    val showTasksWithNoAssignee: Boolean
 )

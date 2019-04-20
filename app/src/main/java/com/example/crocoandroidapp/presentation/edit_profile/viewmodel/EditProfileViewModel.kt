@@ -16,7 +16,7 @@ class EditProfileViewModel(
     private val schedulersProvider: SchedulersProvider
 ) : BaseViewModel() {
 
-    var user = User("", "", null, null, null, null, null, null, 0)
+    lateinit var user: User
     val stateCommand = CommandsLiveData<EditProfileViewState>()
 
     fun copyUser(newUser: User) {
@@ -45,9 +45,9 @@ class EditProfileViewModel(
         }
     }
 
-    private fun checkFields(): Boolean = checkName(user.firstName) && checkPhoneNumber(user.phoneNumber)
-
     fun checkName(name: String?) = name?.isNotBlank() ?: false
 
     fun checkPhoneNumber(phone: String?) = phone?.isNotBlank() ?: false
+
+    private fun checkFields(): Boolean = checkName(user.firstName) && checkPhoneNumber(user.phoneNumber)
 }

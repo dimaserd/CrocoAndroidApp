@@ -15,7 +15,8 @@ object TaskConverter {
     fun toNetwork(monthShift: Int, userIds: List<String>): TaskRequest {
         return TaskRequest(
             monthShift = monthShift,
-            userIds = userIds
+            userIds = userIds,
+            showTasksWithNoAssignee = true
         )
     }
 

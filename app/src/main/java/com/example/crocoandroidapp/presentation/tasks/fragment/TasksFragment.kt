@@ -94,7 +94,7 @@ class TasksFragment : BaseFragment() {
             is Content -> showContent()
             is Loading -> showLoading()
             is NoData -> showZeroScreen()
-            is SnackBarErrorCommand -> {
+            is SnackBarCommand -> {
                 showZeroScreen()
                 showSnackbar(state.messageResource)
             }

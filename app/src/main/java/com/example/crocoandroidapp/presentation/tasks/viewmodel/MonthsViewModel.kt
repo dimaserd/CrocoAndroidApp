@@ -36,7 +36,7 @@ class MonthsViewModel(
                 onSuccess = {
                     monthsLiveData.onNext(MonthViewState.MonthWithTasks(tasks = it))
                 },
-                onError = { stateCommand.onNext(SnackBarErrorCommand(it)) }
+                onError = { stateCommand.onNext(SnackBarCommand(it)) }
             )
             .disposeOnViewModelDestroy()
 

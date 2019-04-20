@@ -32,4 +32,8 @@ class UserUseCase(private val userRepository: UserRepository) {
     fun updateUser(user: User): Completable {
         return userRepository.updateProfile(user)
     }
+
+    fun uploadAvatar(avatar: Avatar): Completable {
+        return userRepository.uploadAvatar(avatar)
+    }
 }

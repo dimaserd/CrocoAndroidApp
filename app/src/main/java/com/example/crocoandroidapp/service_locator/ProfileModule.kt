@@ -2,6 +2,7 @@ package com.example.crocoandroidapp.service_locator
 
 import com.example.crocoandroidapp.presentation.profile.viewmodel.ProfileViewModel
 import com.example.crocoandroidapp.utils.NetworkConstants
+import com.example.data.network.PhotoApi
 import com.example.data.network.UserApi
 import com.example.data.repository.UserRepositoryImpl
 import com.example.domain.repository.UserRepository
@@ -22,7 +23,16 @@ val profileModule = module {
             build()
         }.create(UserApi::class.java)
     }
-    factory<UserRepository> { UserRepositoryImpl(get()) }
+    single {
+        with(Retrofit.Builder()) {
+            baseUrl(NetworkConstants.URL)
+            addConverterFactory(GsonConverterFactory.create(get()))
+            addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            client(get())
+            build()
+        }.create(PhotoApi::class.java)
+    }
+    factory<UserRepository> { UserRepositoryImpl(get(), get()) }
     factory { UserUseCase(get()) }
     viewModel { ProfileViewModel(get(), get()) }
 }

@@ -14,4 +14,6 @@ interface UserRepository {
     fun loadAllUsers(): Single<List<User>>
 
     fun updateProfile(user: User): Completable
+
+    fun uploadAvatar(avatar: Avatar): Completable
 }

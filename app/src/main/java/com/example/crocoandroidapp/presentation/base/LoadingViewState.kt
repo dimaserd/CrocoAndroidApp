@@ -8,5 +8,5 @@ sealed class LoadingViewState {
 
     object NoData : LoadingViewState()
 
-    class SnackBarErrorCommand(val messageResource: Int) : LoadingViewState()
+    class SnackBarCommand(val messageResource: Int) : LoadingViewState()
 }

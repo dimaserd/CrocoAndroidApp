@@ -123,7 +123,9 @@ class ProfileFragment : BaseFragment() {
             is Loading -> showLoading()
             is NoData -> showZeroScreen()
             is SnackBarCommand -> {
-                showZeroScreen()
+                if (state.isError) {
+                    showZeroScreen()
+                }
                 showSnackbar(state.messageResource)
             }
         }

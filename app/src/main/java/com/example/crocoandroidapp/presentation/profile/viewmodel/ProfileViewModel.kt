@@ -31,7 +31,7 @@ class ProfileViewModel(
         userUseCase.uploadAvatar(avatarUri)
             .schedulersIoToMain(schedulersProvider)
             .smartSubscribe(
-                onSuccess = { stateCommand.onNext(SnackBarCommand(R.string.successful_photo_upload)) },
+                onSuccess = { stateCommand.onNext(SnackBarCommand(R.string.successful_photo_upload, isError = false)) },
                 onError = { stateCommand.onNext(SnackBarCommand(it)) }
             )
             .disposeOnViewModelDestroy()

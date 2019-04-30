@@ -3,7 +3,6 @@ package com.example.data.repository
 import android.net.Uri
 import com.example.data.converter.*
 import com.example.data.entity.avatar_download.AvatarDownloadResponse
-import com.example.data.entity.avatar_upload.AvatarUploadResponse
 import com.example.data.network.PhotoApi
 import com.example.data.network.UserApi
 import com.example.domain.model.Avatar
@@ -11,9 +10,6 @@ import com.example.domain.model.User
 import com.example.domain.repository.UserRepository
 import io.reactivex.Completable
 import io.reactivex.Single
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class UserRepositoryImpl(
     private val userApi: UserApi,
@@ -39,19 +35,22 @@ class UserRepositoryImpl(
     }
 
     override fun uploadAvatar(avatarUri: Uri): Single<Int> {
-        val request = AvatarUploadConverter.toNetwork(avatarUri)
-        val response2 = photoApi.uploadAvatar(request)
-        response2.enqueue(object : Callback<AvatarUploadResponse> {
-            override fun onFailure(call: Call<AvatarUploadResponse>, t: Throwable) {
-                val a = 0
-            }
+//        val request = AvatarUploadConverter.toNetwork(avatarUri)
+//        val response2 = photoApi.uploadAvatar(request)
+//        response2.enqueue(object : Callback<AvatarUploadResponse> {
+//            override fun onFailure(call: Call<AvatarUploadResponse>, t: Throwable) {
+//                val a = 0
+//            }
+//
+//            override fun onResponse(call: Call<AvatarUploadResponse>, response: Response<AvatarUploadResponse>) {
+//                val b = 0
+//            }
+//        })
+//
+//        return Single.just(1)
 
-            override fun onResponse(call: Call<AvatarUploadResponse>, response: Response<AvatarUploadResponse>) {
-                val b = 0
-            }
-        })
-
-        return Single.just(1)
+        return photoApi.uploadAvatar(AvatarUploadConverter.toNetwork(avatarUri))
+            .map { AvatarUploadConverter.fromNetwork(it) }
     }
 
     override fun updateUserAvatar(avatarFileId: Int): Completable {

@@ -23,5 +23,5 @@ interface UserApi {
     fun updateProfile(@Body body: EditProfileRequest): Completable
 
     @POST("/Api/Client/UpdateClientPhoto")
-    fun updateUserAvatar(@Query("avatarFieldId") avatarFieldId: Int): Completable
+    fun updateUserAvatar(@Query("fileId") avatarFieldId: Int): Completable
 }

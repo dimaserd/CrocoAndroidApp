@@ -4,7 +4,6 @@ import com.example.data.entity.avatar_upload.AvatarUploadResponse
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.http.*
 
 interface PhotoApi {
@@ -14,6 +13,6 @@ interface PhotoApi {
     fun downloadAvatar(@Path("avatarFieldId") avatarFieldId: Int): Single<ResponseBody>
 
     @Multipart
-    @POST("/Api/FilesDirectory/Upload")
-    fun uploadAvatar(@Part file: MultipartBody.Part): Call<AvatarUploadResponse>
+    @POST("/Api/FilesDirectory/UploadFiles")
+    fun uploadAvatar(@Part file: MultipartBody.Part): Single<AvatarUploadResponse>
 }

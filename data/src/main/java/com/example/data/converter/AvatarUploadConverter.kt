@@ -18,8 +18,7 @@ object AvatarUploadConverter {
 
     fun fromNetwork(avatarUploadResponse: AvatarUploadResponse?): Int {
         avatarUploadResponse?.let {
-            // TODO
-            return 0
+            return it.responseObject[0]
         } ?: throw ConvertException("avatar upload response is null")
     }
 }

@@ -19,6 +19,10 @@ class EditProfileViewModel(
     lateinit var user: User
     val stateCommand = CommandsLiveData<EditProfileViewState>()
 
+    fun initUser(newUser: User) {
+        user = newUser
+    }
+
     fun copyUser(newUser: User) {
         user = user.copy(
             firstName = newUser.firstName,

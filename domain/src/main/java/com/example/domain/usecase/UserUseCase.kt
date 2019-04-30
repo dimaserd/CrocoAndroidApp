@@ -1,5 +1,6 @@
 package com.example.domain.usecase
 
+import android.net.Uri
 import com.example.domain.model.Avatar
 import com.example.domain.model.User
 import com.example.domain.model.UserWithAvatar
@@ -33,7 +34,9 @@ class UserUseCase(private val userRepository: UserRepository) {
         return userRepository.updateProfile(user)
     }
 
-    fun uploadAvatar(avatar: Avatar): Completable {
-        return userRepository.uploadAvatar(avatar)
+    fun uploadAvatar(avatarUri: Uri): Completable {
+        return userRepository.uploadAvatar(avatarUri).flatMapCompletable { avatarFileId ->
+            userRepository.updateUserAvatar(avatarFileId)
+        }
     }
 }

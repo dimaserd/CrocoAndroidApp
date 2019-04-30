@@ -4,5 +4,5 @@ import com.example.data.entity.login.LoginRequest
 
 object LoginConverter {
 
-    fun toNetwork(email: String, password: String) = LoginRequest(email, password, true)
+    fun toNetwork(email: String, password: String, rememberMe: Boolean) = LoginRequest(email, password, rememberMe)
 }

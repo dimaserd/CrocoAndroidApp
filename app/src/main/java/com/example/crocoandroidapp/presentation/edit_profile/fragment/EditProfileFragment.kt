@@ -42,7 +42,7 @@ class EditProfileFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.apply {
-            getParcelable<User>(USER_EXTRA)?.let { viewModel.copyUser(it) }
+            getParcelable<User>(USER_EXTRA)?.let { viewModel.initUser(it) }
         }
 
         observe(viewModel.stateCommand, ::onStateChanged)

@@ -9,6 +9,11 @@ import timber.log.Timber
 
 class CrocoAndroidApp : Application() {
 
+    companion object {
+
+        const val APP_TAG = "Croco"
+    }
+
     override fun onCreate() {
         super.onCreate()
 

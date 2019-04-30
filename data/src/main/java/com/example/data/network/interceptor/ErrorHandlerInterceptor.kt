@@ -9,9 +9,8 @@ class ErrorHandlerInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val response = chain.proceed(request)
-        val code = response.code()
 
-        when (code) {
+        when (response.code()) {
             in 400..599 -> throw ServerErrorConverter.fromNetwork(response)
         }
 

@@ -35,8 +35,10 @@
     <string name="hint_second_name">Фамилия</string>
     <string name="hint_third_name">Отчество</string>
     <string name="wrong_field">Проверьте введеные поля</string>
-    <string name="no_camera">Нет доступа к камере</string>
+    <string name="no_camera_access">Нет доступа к камере</string>
+    <string name="no_files_access">Нет доступа к файлам</string>
     <string name="take_photo">Сделать фото</string>
     <string name="take_from_galery">Выбрать из галереи</string>
     <string name="successful_photo_upload">Ваша фотография была загружена</string>
+    <string name="pick_image">Выбери фотографию</string>
 </resources>

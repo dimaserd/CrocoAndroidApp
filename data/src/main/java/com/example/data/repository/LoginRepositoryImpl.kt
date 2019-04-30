@@ -12,8 +12,13 @@ class LoginRepositoryImpl(
     private val persistentStorage: PersistentStorage
 ) : LoginRepository {
 
+    companion object {
+
+        private val TIME_REGEX = "".toRegex()
+    }
+
     override fun login(email: String, password: String): Single<Boolean> {
-        return authApi.login(LoginConverter.toNetwork(email, password)).map {
+        return authApi.login(LoginConverter.toNetwork(email, password, true)).map {
             if (!it.isSucceeded) {
                 it.message == "Вы уже авторизованы в системе"
             } else {
@@ -27,7 +32,15 @@ class LoginRepositoryImpl(
     }
 
     override fun isLoggedIn(): Boolean {
-        // TODO add check on expired
-        return persistentStorage.getCookies() != null
+        val cookies = persistentStorage.getCookies()
+
+        // TODO
+//        cookies?.forEach { cookie ->
+//            val a = SimpleDateFormat("DD-MMMM-YYYY HH:MM:SS", Locale.ENGLISH).parse(cookie)
+//            val b = 0
+//                11-May-2019 19:59:54
+//        }
+
+        return cookies != null
     }
 }

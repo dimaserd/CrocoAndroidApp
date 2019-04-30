@@ -1,10 +1,9 @@
 package com.example.data.repository
 
-import com.example.data.converter.AllUsersConverter
-import com.example.data.converter.AvatarConverter
-import com.example.data.converter.EditProfileConverter
-import com.example.data.converter.UserConverter
-import com.example.data.entity.avatar.AvatarResponse
+import android.net.Uri
+import com.example.data.converter.*
+import com.example.data.entity.avatar_download.AvatarDownloadResponse
+import com.example.data.entity.avatar_upload.AvatarUploadResponse
 import com.example.data.network.PhotoApi
 import com.example.data.network.UserApi
 import com.example.domain.model.Avatar
@@ -12,6 +11,9 @@ import com.example.domain.model.User
 import com.example.domain.repository.UserRepository
 import io.reactivex.Completable
 import io.reactivex.Single
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class UserRepositoryImpl(
     private val userApi: UserApi,
@@ -23,7 +25,9 @@ class UserRepositoryImpl(
     }
 
     override fun loadAvatar(avatarFieldId: Int): Single<Avatar> {
-        return photoApi.downloadAvatar(avatarFieldId).map { AvatarConverter.fromNetwork(AvatarResponse(it)) }
+        return photoApi.downloadAvatar(avatarFieldId).map {
+            AvatarDownloadConverter.fromNetwork(AvatarDownloadResponse(it))
+        }
     }
 
     override fun loadAllUsers(): Single<List<User>> {
@@ -34,8 +38,23 @@ class UserRepositoryImpl(
         return userApi.updateProfile(EditProfileConverter.toNetwork(user))
     }
 
-    override fun uploadAvatar(avatar: Avatar): Completable {
-        // TODO
-        return photoApi.uploadAvatar(0)
+    override fun uploadAvatar(avatarUri: Uri): Single<Int> {
+        val request = AvatarUploadConverter.toNetwork(avatarUri)
+        val response2 = photoApi.uploadAvatar(request)
+        response2.enqueue(object : Callback<AvatarUploadResponse> {
+            override fun onFailure(call: Call<AvatarUploadResponse>, t: Throwable) {
+                val a = 0
+            }
+
+            override fun onResponse(call: Call<AvatarUploadResponse>, response: Response<AvatarUploadResponse>) {
+                val b = 0
+            }
+        })
+
+        return Single.just(1)
+    }
+
+    override fun updateUserAvatar(avatarFileId: Int): Completable {
+        return userApi.updateUserAvatar(avatarFileId)
     }
 }

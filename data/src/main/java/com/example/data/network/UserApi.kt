@@ -9,6 +9,7 @@ import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface UserApi {
 
@@ -20,4 +21,7 @@ interface UserApi {
 
     @POST("/Api/Client/Update")
     fun updateProfile(@Body body: EditProfileRequest): Completable
+
+    @POST("/Api/Client/UpdateClientPhoto")
+    fun updateUserAvatar(@Query("avatarFieldId") avatarFieldId: Int): Completable
 }

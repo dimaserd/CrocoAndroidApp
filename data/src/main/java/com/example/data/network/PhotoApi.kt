@@ -1,12 +1,11 @@
 package com.example.data.network
 
-import io.reactivex.Completable
+import com.example.data.entity.avatar_upload.AvatarUploadResponse
 import io.reactivex.Single
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Streaming
+import retrofit2.Call
+import retrofit2.http.*
 
 interface PhotoApi {
 
@@ -14,10 +13,7 @@ interface PhotoApi {
     @GET("/FileCopies/Images/Icon/{avatarFieldId}.jpg")
     fun downloadAvatar(@Path("avatarFieldId") avatarFieldId: Int): Single<ResponseBody>
 
-    @Streaming
-    @POST("/FileCopies/Images/Icon/{avatarFieldId}.jpg")
-    fun uploadAvatar(
-        @Path("avatarFieldId") avatarFieldId: Int
-        // TODO
-    ): Completable
+    @Multipart
+    @POST("/Api/FilesDirectory/Upload")
+    fun uploadAvatar(@Part file: MultipartBody.Part): Call<AvatarUploadResponse>
 }

@@ -13,8 +13,8 @@ import com.example.crocoandroidapp.presentation.base.LoadingViewState
 import com.example.crocoandroidapp.presentation.base.LoadingViewState.*
 import com.example.crocoandroidapp.presentation.tasks.adapter.MonthViewPagerAdapter
 import com.example.crocoandroidapp.presentation.tasks.adapter.item.MonthItem
-import com.example.crocoandroidapp.presentation.tasks.state.MonthViewState
-import com.example.crocoandroidapp.presentation.tasks.viewmodel.MonthsViewModel
+import com.example.crocoandroidapp.presentation.tasks.state.TasksViewState
+import com.example.crocoandroidapp.presentation.tasks.viewmodel.TasksViewModel
 import com.example.crocoandroidapp.utils.makeGone
 import com.example.crocoandroidapp.utils.makeVisible
 import com.example.crocoandroidapp.utils.observe
@@ -39,7 +39,7 @@ class TasksFragment : BaseFragment() {
         const val USERS_EXTRA = "USERS_EXTRA"
     }
 
-    private val viewModel by inject<MonthsViewModel>()
+    private val viewModel by inject<TasksViewModel>()
     private lateinit var monthsAdapter: MonthViewPagerAdapter
 
     override fun getLayout() = R.layout.fragment_tasks
@@ -101,16 +101,16 @@ class TasksFragment : BaseFragment() {
         }
     }
 
-    private fun onTasksChanged(months: MonthViewState) {
+    private fun onTasksChanged(months: TasksViewState) {
         showContent()
         when (months) {
-            is MonthViewState.MonthWithTasks -> {
+            is TasksViewState.MonthsWithTasks -> {
                 val onAddButtonClicked = { month: MonthItem ->
                     val bundle = bundleOf(MONTH_EXTRA to month)
                     findNavController().navigate(R.id.action_fragment_tasks_to_add_task, bundle)
                 }
 
-//                monthsAdapter.addMonths()
+                monthsAdapter.addMonths(months.monthWithTasks.map { MonthItem(it.tasks, onAddButtonClicked) })
             }
         }
     }

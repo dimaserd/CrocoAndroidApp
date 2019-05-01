@@ -1,6 +1,6 @@
 package com.example.crocoandroidapp.service_locator
 
-import com.example.crocoandroidapp.presentation.tasks.viewmodel.MonthsViewModel
+import com.example.crocoandroidapp.presentation.tasks.viewmodel.TasksViewModel
 import com.example.crocoandroidapp.utils.NetworkConstants
 import com.example.data.network.TaskApi
 import com.example.data.repository.TaskRepositoryImpl
@@ -24,5 +24,5 @@ val taskModule = module {
     }
     factory<TaskRepository> { TaskRepositoryImpl(get()) }
     factory { TaskUseCase(get()) }
-    viewModel { MonthsViewModel(get(), get()) }
+    viewModel { TasksViewModel(get(), get()) }
 }
